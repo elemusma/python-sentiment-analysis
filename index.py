@@ -7,3 +7,6 @@ df1.columns=['Title','Date']
 
 newDate1 = datetime.strptime('Dec. 6, 2019', '%b. %d, %Y').date()
 print(newDate1)
+
+for dateOfArticles in df1['Date']:
+    datetime.strptime(dateOfArticles, '%b. %d, %Y').date()
