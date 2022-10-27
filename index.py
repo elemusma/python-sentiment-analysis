@@ -19,13 +19,20 @@ dfEodPrice['Date'] = dfEodPrice['Date'].astype('datetime64[ns]')
 # print(dfEodPrice['Date'][1])
 
 # dfEodPrice2 = dfEodPrice.drop(['Open','High','Low','Close','Volume'], axis=1) 
+dfEodPrice2 = dfEodPrice
 #drop unwanted rows
 # dfEodPrice2.set_index('Date', inplace=True) #set date column as index
 # dfEodPrice2.to_csv('TSLA-Historical-Data.csv', index=['Date'])
 
-dfEodPrice['Returns'] = dfEodPrice['Adj Close']/dfEodPrice['Adj Close'].shift(1) - 1 # calculate daily returns
-dfEodPrice.to_csv('TSLA-Historical-Data.csv')
-# print(dfEodPrice)
+dfEodPrice2['Returns'] = dfEodPrice2['Adj Close']/dfEodPrice2['Adj Close'].shift(1) - 1 # calculate daily returns
+dfEodPrice2.to_csv('TSLA-Historical-Data.csv')
+# print(dfEodPrice2)
+
+df2 = df1.groupby(['New Date']).sum()
+# df1['New Date'] = df1.to_csv('TSLA-Headlines.csv')
+
+df2['Score(1)'] = df2.shift(1)
+print(dfEodPrice2)
 
 
 # newDate1 = datetime.strptime('Dec. 6, 2019', '%b. %d, %Y').date()
@@ -59,6 +66,3 @@ for headline in df1['Title']:
 df1['Score'] = pd.DataFrame(results)['compound']
 # df1.to_csv('TSLA-Headlines.csv')
 # print(df1)
-
-# df2 = df1.groupby(['New Date']).sum()
-# df1['New Date'] = df1.to_csv('TSLA-Headlines.csv')
